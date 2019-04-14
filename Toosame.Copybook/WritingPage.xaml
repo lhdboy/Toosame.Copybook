@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="Toosame.Copybook.WritingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Toosame.Copybook"
+    xmlns:xutil="using:Toosame.Copybook.Utills"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:media="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    mc:Ignorable="d"
+    Background="{ThemeResource SystemControlAcrylicWindowBrush}"
+    Rotation="90">
+
+    <Grid x:Name="writingTable">
+        <!--<InkToolbar
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            InitialControls="None">
+            <InkToolbarCustomPenButton Content="&#xE76B;" FontFamily="Segoe MDL2 Assets"/>
+            <InkToolbarCustomPenButton Content="&#xE76C;" FontFamily="Segoe MDL2 Assets"/>
+            <InkToolbarCustomPenButton Content="&#xEE71;" FontFamily="Segoe MDL2 Assets"/>
+            <InkToolbarBallpointPenButton IsChecked="True"/>
+            <InkToolbarEraserButton />
+            <InkToolbarStencilButton />
+        </InkToolbar>-->
+        <!--<Grid x:Name="copybookArea" Margin="70,40" Background="White">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                    <RowDefinition Height="90" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="90"/>
+                </Grid.ColumnDefinitions>
+                <Canvas>
+                    <Line StrokeThickness="0.5" X2="90" Y2="90" Stroke="#FFA5BFDD" StrokeEndLineCap="Triangle"/>
+                    <Line StrokeThickness="0.5" Y1="90" Stroke="#FFA5BFDD" StrokeEndLineCap="Triangle" X2="90"/>
+                    <Line StrokeThickness="0.5" Stroke="#FFA5BFDD" StrokeEndLineCap="Triangle" X2="90" Y1="45" Y2="45"/>
+                    <Line StrokeThickness="0.5" Stroke="#FFA5BFDD" StrokeEndLineCap="Triangle" X1="45" Y1="90" X2="45"/>
+
+                    <Line StrokeThickness="0.5" Stroke="#FF3285E5" StrokeEndLineCap="Triangle" Y1="90" X2="90" X1="90" Fill="Black"/>
+                    <Line StrokeThickness="0.5" Stroke="#FF3285E5" StrokeEndLineCap="Triangle" X2="90" Y1="90" Y2="90" Fill="Black"/>
+                </Canvas>
+                <TextBlock FontSize="42" HorizontalAlignment="Center" VerticalAlignment="Center" Text="和" Opacity="0.82" Foreground="#FF444444"/>
+            </Grid>
+            <InkCanvas x:Name="writingInkCanvas"/>
+        </Grid>-->
+    </Grid>
+</Page>
