@@ -17,12 +17,18 @@ namespace Toosame.Copybook.CopybookGrid
 
         public bool IsGenerateWordGrid { get; private set; }
 
+        private readonly List<Canvas> _canvasList;
+        private readonly List<TextBlock> _textBlockList;
+
         private readonly int _rowNum;
         private readonly int _colNum;
         private readonly double _area;
 
         public CopybookControlBuilder(int rowNum, int colNum, double area)
         {
+            _canvasList = new List<Canvas>();
+            _textBlockList = new List<TextBlock>();
+
             _rowNum = rowNum;
             _colNum = colNum;
             _area = area;
@@ -38,7 +44,7 @@ namespace Toosame.Copybook.CopybookGrid
             CopybookAresGrid = copybookArea;
         }
 
-        public InkToolbar GenerateInkToolbar(InkCanvas inkCanvas)
+        public InkToolbar GenerateInkToolbar(InkCanvas inkCanvas, Action<object, RoutedEventArgs> onChangeGrid)
         {
             InkToolbar inkToolbar = new InkToolbar();
             inkToolbar.Name = "inkToolbar";
@@ -51,6 +57,38 @@ namespace Toosame.Copybook.CopybookGrid
             //尺规
             inkToolbar.Children.Add(new InkToolbarEraserButton());
 
+            MenuFlyout menuFlyout = new MenuFlyout();
+
+            ToggleMenuFlyoutItem miWord = new ToggleMenuFlyoutItem();
+            miWord.Text = "米字格";
+            miWord.Click += (s, e) => onChangeGrid?.Invoke(s, e);
+
+            ToggleMenuFlyoutItem tianWord = new ToggleMenuFlyoutItem();
+            tianWord.Text = "田字格";
+            tianWord.Click += (s, e) => onChangeGrid?.Invoke(s, e);
+
+            ToggleMenuFlyoutItem kouWord = new ToggleMenuFlyoutItem();
+            kouWord.Text = "口字格";
+            kouWord.Click += (s, e) => onChangeGrid?.Invoke(s, e);
+
+            ToggleMenuFlyoutItem clearWord = new ToggleMenuFlyoutItem();
+            clearWord.Text = "五";
+            clearWord.Click += (s, e) => onChangeGrid?.Invoke(s, e);
+
+            menuFlyout.Items.Add(miWord);
+            menuFlyout.Items.Add(tianWord);
+            menuFlyout.Items.Add(kouWord);
+            menuFlyout.Items.Add(clearWord);
+
+            inkToolbar.Children.Add(new InkToolbarCustomToolButton()
+            {
+                Content = new Button()
+                {
+                    Content = "设",
+                    Background = new SolidColorBrush(Colors.Transparent),
+                    Flyout = menuFlyout
+                }
+            });
 
             //判断屏幕方向
             if (_rowNum < _colNum)
@@ -97,7 +135,7 @@ namespace Toosame.Copybook.CopybookGrid
                 return;
 
             //判断是否已生成，已生成则重新先清空
-            ClearItem<Canvas>();
+            ClearCanvas();
 
             for (int i = 0; i < _rowNum; i++)
             {
@@ -156,6 +194,8 @@ namespace Toosame.Copybook.CopybookGrid
 
                     Grid.SetColumn(canvas, j);
                     Grid.SetRow(canvas, i);
+
+                    _canvasList.Add(canvas);
                     CopybookAresGrid.Children.Insert(0, canvas);
                 }
             }
@@ -169,7 +209,7 @@ namespace Toosame.Copybook.CopybookGrid
                 throw new NotSupportedException("没有生成格子，不能生成字");
 
             //判断是否已生成，已生成则重新先清空
-            ClearItem<TextBlock>();
+            ClearTextBlock();
 
             int wordGridLasrIndex
                 = CopybookAresGrid.Children.IndexOf(CopybookAresGrid.Children.Last(p => p is Canvas)) + 1;
@@ -199,22 +239,33 @@ namespace Toosame.Copybook.CopybookGrid
                 Grid.SetColumn(word, col);
                 Grid.SetRow(word, row);
 
+                _textBlockList.Add(word);
                 CopybookAresGrid.Children.Insert(wordGridLasrIndex, word);
 
                 col++;
             }
         }
 
-        private void ClearItem<T>()
+        public void ClearCanvas()
         {
-            if (CopybookAresGrid.Children.Count >= (_rowNum * _colNum))
+            foreach (var item in _canvasList)
             {
-                foreach (var item in CopybookAresGrid.Children)
-                {
-                    if (item is T)
-                        CopybookAresGrid.Children.Remove(item);
-                }
+                item.Visibility = Visibility.Collapsed;
+                CopybookAresGrid.Children.Remove(item);
             }
+
+            _canvasList.Clear();
+        }
+
+        public void ClearTextBlock()
+        {
+            foreach (var item in _textBlockList)
+            {
+                item.Visibility = Visibility.Collapsed;
+                CopybookAresGrid.Children.Remove(item);
+            }
+
+            _textBlockList.Clear();
         }
     }
 }

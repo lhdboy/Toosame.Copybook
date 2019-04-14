@@ -16,6 +16,18 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             InitialControls="None">
+            <InkToolbarCustomToolButton>
+                <Button Background="Transparent" Content="田">
+                    <Button.Flyout>
+                        <MenuFlyout x:Name="flyout">
+                            <MenuFlyoutItem Click="Button_Click">米字格</MenuFlyoutItem>
+                            <MenuFlyoutItem Click="Button_Click">田字格</MenuFlyoutItem>
+                            <MenuFlyoutItem Click="Button_Click">口字格</MenuFlyoutItem>
+                            <MenuFlyoutItem Click="Button_Click">清空</MenuFlyoutItem>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+            </InkToolbarCustomToolButton>
             <InkToolbarCustomPenButton Content="&#xE76B;" FontFamily="Segoe MDL2 Assets"/>
             <InkToolbarCustomPenButton Content="&#xE76C;" FontFamily="Segoe MDL2 Assets"/>
             <InkToolbarCustomPenButton Content="&#xEE71;" FontFamily="Segoe MDL2 Assets"/>

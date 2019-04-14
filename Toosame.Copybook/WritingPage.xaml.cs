@@ -40,7 +40,7 @@ namespace Toosame.Copybook
             _copybookControlBuilder.CopybookAresGrid.Children.Add(_inkCanvas);
 
             writingTable.Children.Add(_copybookControlBuilder.CopybookAresGrid);
-            writingTable.Children.Add(_copybookControlBuilder.GenerateInkToolbar(_inkCanvas));
+            writingTable.Children.Add(_copybookControlBuilder.GenerateInkToolbar(_inkCanvas, Button_Click));
 
 
             //生成网格
@@ -55,6 +55,26 @@ namespace Toosame.Copybook
             _copybookControlBuilder.GenerateWord(new FontFamily("Assets/Fonts/HYXingKaiJ.ttf#HYXingKaiJ"), cssj.ToCharArray());
 
             base.OnNavigatedTo(e);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MenuFlyoutItem menuFlyoutItem = sender as MenuFlyoutItem;
+            if (menuFlyoutItem.Text == "米字格")
+            {
+                _copybookControlBuilder.GenerateWordGrid(new MiWordGridGenerate());
+            }
+            else if (menuFlyoutItem.Text == "田字格")
+            {
+                _copybookControlBuilder.GenerateWordGrid(new TianWordGridGenerate());
+            }
+            else if (menuFlyoutItem.Text == "口字格")
+            {
+                _copybookControlBuilder.GenerateWordGrid(new KouWordGridGenerate());
+            } else
+            {
+                _copybookControlBuilder.ClearCanvas();
+            }
         }
     }
 }
