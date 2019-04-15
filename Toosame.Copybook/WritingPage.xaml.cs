@@ -52,7 +52,7 @@ namespace Toosame.Copybook
             string cssj = "陈胜者，阳城人也，字涉。吴广者，阳夏人也，字叔。陈涉少时，尝与人佣耕，辍耕之垄上，怅恨久之，曰：“苟富贵，无相忘。”佣者笑而应曰：“若为佣耕，何富贵也？”陈涉太息曰：“嗟乎！燕雀安知鸿鹄之志哉！”";
 
             //string[] words = new string[] { "寥", "落", "古", "行", "宫", "，", "宫", "花", "寂", "寞", "红" };
-            _copybookControlBuilder.GenerateWord(new FontFamily("Assets/Fonts/HYXingKaiJ.ttf#HYXingKaiJ"), cssj.ToCharArray());
+            _copybookControlBuilder.GenerateWord(new FontFamily("华文新魏"), cssj.ToCharArray());
 
             base.OnNavigatedTo(e);
         }
