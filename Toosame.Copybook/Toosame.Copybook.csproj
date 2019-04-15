@@ -119,14 +119,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CopybookGrid\CopybookControlBuilder.cs" />
-    <Compile Include="CopybookGrid\IWordGridGenerate.cs" />
-    <Compile Include="CopybookGrid\KouWordGridGenerate.cs" />
-    <Compile Include="CopybookGrid\MiWordGridGenerate.cs" />
-    <Compile Include="CopybookGrid\TianWordGridGenerate.cs" />
+    <Compile Include="Core\CopybookControlBuilder.cs" />
+    <Compile Include="Core\IWordGridGenerate.cs" />
+    <Compile Include="Core\KouWordGridGenerate.cs" />
+    <Compile Include="Core\MiWordGridGenerate.cs" />
+    <Compile Include="Core\TianWordGridGenerate.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pens\CalligraphicPen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WritingPage.xaml.cs">
       <DependentUpon>WritingPage.xaml</DependentUpon>

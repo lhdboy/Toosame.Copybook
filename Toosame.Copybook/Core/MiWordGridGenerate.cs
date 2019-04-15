@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Shapes;
 
-namespace Toosame.Copybook.CopybookGrid
+namespace Toosame.Copybook.Core
 {
     public class MiWordGridGenerate : TianWordGridGenerate
     {

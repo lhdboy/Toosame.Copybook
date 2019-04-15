@@ -1,6 +1,6 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace Toosame.Copybook.CopybookGrid
+namespace Toosame.Copybook.Core
 {
     public interface IWordGridGenerate
     {

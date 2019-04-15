@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Toosame.Copybook.Pens;
 using Windows.UI;
 using Windows.UI.Input.Inking;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace Toosame.Copybook.CopybookGrid
+namespace Toosame.Copybook.Core
 {
     public class CopybookControlBuilder
     {
@@ -50,8 +51,25 @@ namespace Toosame.Copybook.CopybookGrid
             inkToolbar.Name = "inkToolbar";
             inkToolbar.InitialControls = InkToolbarInitialControls.None;
             inkToolbar.TargetInkCanvas = inkCanvas;
+            //书法笔
+            inkToolbar.Children.Add(new InkToolbarCustomPenButton()
+            {
+                CustomPen = new CalligraphicPen(),
+                SelectedBrushIndex = 0,
+                MinStrokeWidth = 2,
+                MaxStrokeWidth = 20,
+                SelectedStrokeWidth = 3,
+                IsChecked = true,
+                ConfigurationContent = new InkToolbarPenConfigurationControl(),
+                Content = new FontIcon()
+                {
+                    FontFamily = new FontFamily("Segoe MDL2 Assets"),
+                    Glyph = "\uEDFB",
+                    FontSize = 16,
+                },
+            });
             //球点笔
-            inkToolbar.Children.Add(new InkToolbarBallpointPenButton() { IsChecked = true, SelectedStrokeWidth = 3 });
+            inkToolbar.Children.Add(new InkToolbarBallpointPenButton());
             //橡皮擦
             inkToolbar.Children.Add(new InkToolbarStencilButton());
             //尺规

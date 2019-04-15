@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Shapes;
 
-namespace Toosame.Copybook.CopybookGrid
+namespace Toosame.Copybook.Core
 {
-
     public class TianWordGridGenerate : KouWordGridGenerate
     {
         protected override UIElement[] GetGrid(double area)
