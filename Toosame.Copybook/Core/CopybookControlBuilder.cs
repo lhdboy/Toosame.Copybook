@@ -45,73 +45,31 @@ namespace Toosame.Copybook.Core
             CopybookAresGrid = copybookArea;
         }
 
-        public InkToolbar GenerateInkToolbar(InkCanvas inkCanvas, Action<object, RoutedEventArgs> onChangeGrid)
+        public void SetInkToolbar(InkCanvas inkCanvas, InkToolbar inkToolbar, Grid toolbar, Button nextBtn, Button previousBtn)
         {
-            InkToolbar inkToolbar = new InkToolbar();
-            inkToolbar.Name = "inkToolbar";
-            inkToolbar.InitialControls = InkToolbarInitialControls.None;
             inkToolbar.TargetInkCanvas = inkCanvas;
-            //书法笔
-            inkToolbar.Children.Add(new InkToolbarCustomPenButton()
-            {
-                CustomPen = new CalligraphicPen(),
-                SelectedBrushIndex = 0,
-                MinStrokeWidth = 2,
-                MaxStrokeWidth = 20,
-                SelectedStrokeWidth = 3,
-                IsChecked = true,
-                ConfigurationContent = new InkToolbarPenConfigurationControl(),
-                Content = new FontIcon()
-                {
-                    FontFamily = new FontFamily("Segoe MDL2 Assets"),
-                    Glyph = "\uEDFB",
-                    FontSize = 16,
-                },
-            });
-            //球点笔
-            inkToolbar.Children.Add(new InkToolbarBallpointPenButton());
-            //橡皮擦
-            inkToolbar.Children.Add(new InkToolbarStencilButton());
-            //尺规
-            inkToolbar.Children.Add(new InkToolbarEraserButton());
-
-            MenuFlyout menuFlyout = new MenuFlyout();
-
-            ToggleMenuFlyoutItem miWord = new ToggleMenuFlyoutItem();
-            miWord.Text = "米字格";
-            miWord.Click += (s, e) => onChangeGrid?.Invoke(s, e);
-
-            ToggleMenuFlyoutItem tianWord = new ToggleMenuFlyoutItem();
-            tianWord.Text = "田字格";
-            tianWord.Click += (s, e) => onChangeGrid?.Invoke(s, e);
-
-            ToggleMenuFlyoutItem kouWord = new ToggleMenuFlyoutItem();
-            kouWord.Text = "口字格";
-            kouWord.Click += (s, e) => onChangeGrid?.Invoke(s, e);
-
-            ToggleMenuFlyoutItem clearWord = new ToggleMenuFlyoutItem();
-            clearWord.Text = "五";
-            clearWord.Click += (s, e) => onChangeGrid?.Invoke(s, e);
-
-            menuFlyout.Items.Add(miWord);
-            menuFlyout.Items.Add(tianWord);
-            menuFlyout.Items.Add(kouWord);
-            menuFlyout.Items.Add(clearWord);
-
-            inkToolbar.Children.Add(new InkToolbarCustomToolButton()
-            {
-                Content = new Button()
-                {
-                    Content = "设",
-                    Background = new SolidColorBrush(Colors.Transparent),
-                    Flyout = menuFlyout
-                }
-            });
 
             //判断屏幕方向
             if (_rowNum < _colNum)
             {
                 //横向
+                toolbar.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(90, GridUnitType.Star) });
+                toolbar.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0, GridUnitType.Auto) });
+                toolbar.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(90, GridUnitType.Star) });
+
+                toolbar.HorizontalAlignment = HorizontalAlignment.Right;
+                toolbar.VerticalAlignment = VerticalAlignment.Center;
+
+                previousBtn.Content = "上\r\n一\r\n页";
+                previousBtn.CornerRadius = new CornerRadius(4, 4, 0, 0);
+
+                nextBtn.Content = "下\r\n一\r\n页";
+                nextBtn.CornerRadius = new CornerRadius(0, 0, 4, 4);
+
+                Grid.SetRow(previousBtn, 0);
+                Grid.SetRow(inkToolbar, 1);
+                Grid.SetRow(nextBtn, 2);
+
                 inkToolbar.HorizontalAlignment = HorizontalAlignment.Right;
                 inkToolbar.VerticalAlignment = VerticalAlignment.Center;
                 inkToolbar.Orientation = Orientation.Vertical;
@@ -119,11 +77,23 @@ namespace Toosame.Copybook.Core
             else
             {
                 //纵向
+                toolbar.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(90, GridUnitType.Star) });
+                toolbar.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(0, GridUnitType.Auto) });
+                toolbar.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(90, GridUnitType.Star) });
+
+                Grid.SetColumn(previousBtn, 0);
+                Grid.SetColumn(inkToolbar, 1);
+                Grid.SetColumn(nextBtn, 2);
+
+                toolbar.HorizontalAlignment = HorizontalAlignment.Center;
+                toolbar.VerticalAlignment = VerticalAlignment.Top;
+
+                nextBtn.CornerRadius = new CornerRadius(0, 4, 4, 0);
+                previousBtn.CornerRadius = new CornerRadius(4, 0, 0, 4);
+
                 inkToolbar.HorizontalAlignment = HorizontalAlignment.Center;
                 inkToolbar.VerticalAlignment = VerticalAlignment.Top;
             }
-
-            return inkToolbar;
         }
 
         public InkCanvas GenerateInkCanvas()
