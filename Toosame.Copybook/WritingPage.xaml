@@ -7,34 +7,46 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:media="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:pens="using:Toosame.Copybook.Pens"
     mc:Ignorable="d"
     Background="{ThemeResource SystemControlAcrylicWindowBrush}"
     Rotation="90">
 
     <Grid x:Name="writingTable">
-        <!--<InkToolbar
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            InitialControls="None">
-            <InkToolbarCustomToolButton>
-                <Button Background="Transparent" Content="田">
-                    <Button.Flyout>
-                        <MenuFlyout x:Name="flyout">
-                            <MenuFlyoutItem Click="Button_Click">米字格</MenuFlyoutItem>
-                            <MenuFlyoutItem Click="Button_Click">田字格</MenuFlyoutItem>
-                            <MenuFlyoutItem Click="Button_Click">口字格</MenuFlyoutItem>
-                            <MenuFlyoutItem Click="Button_Click">清空</MenuFlyoutItem>
-                        </MenuFlyout>
-                    </Button.Flyout>
-                </Button>
-            </InkToolbarCustomToolButton>
-            <InkToolbarCustomPenButton Content="&#xE76B;" FontFamily="Segoe MDL2 Assets"/>
-            <InkToolbarCustomPenButton Content="&#xE76C;" FontFamily="Segoe MDL2 Assets"/>
-            <InkToolbarCustomPenButton Content="&#xEE71;" FontFamily="Segoe MDL2 Assets"/>
-            <InkToolbarBallpointPenButton IsChecked="True"/>
-            <InkToolbarEraserButton />
-            <InkToolbarStencilButton />
-        </InkToolbar>-->
+        <Grid x:Name="toolbar" VerticalAlignment="Top">
+            <Button x:Name="previousBtn" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Content="上一页"/>
+            <InkToolbar
+                x:Name="inkToolbar"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                InitialControls="None">
+                <InkToolbarCustomToolButton ClickMode="Press">
+                    <Button Foreground="Black" x:Name="wordGridChangeBtn" Style="{StaticResource TextBlockButtonStyle}" Content="&#xE80A;" FontFamily="Segoe MDL2 Assets">
+                        <Button.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Click="WordGridChange_Click">米字格</MenuFlyoutItem>
+                                <MenuFlyoutItem Click="WordGridChange_Click">田字格</MenuFlyoutItem>
+                                <MenuFlyoutItem Click="WordGridChange_Click">口字格</MenuFlyoutItem>
+                                <MenuFlyoutItem Click="WordGridChange_Click">无</MenuFlyoutItem>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                    </Button>
+                </InkToolbarCustomToolButton>
+                <InkToolbarCustomPenButton IsChecked="True">
+                    <InkToolbarCustomPenButton.ConfigurationContent>
+                        <InkToolbarPenConfigurationControl />
+                    </InkToolbarCustomPenButton.ConfigurationContent>
+                    <InkToolbarCustomPenButton.CustomPen>
+                        <pens:CalligraphicPen />
+                    </InkToolbarCustomPenButton.CustomPen>
+                    <FontIcon FontSize="17" FontFamily="Segoe MDL2 Assets" Glyph="&#xEDFB;"/>
+                </InkToolbarCustomPenButton>
+                <InkToolbarBallpointPenButton/>
+                <InkToolbarEraserButton />
+                <InkToolbarStencilButton />
+            </InkToolbar>
+            <Button x:Name="nextBtn" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Content="下一页"/>
+        </Grid>
         <!--<Grid x:Name="copybookArea" Margin="70,40" Background="White">
             <Grid>
                 <Grid.RowDefinitions>
